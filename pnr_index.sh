@@ -27,15 +27,20 @@ export IFS
 mkdir -p data
 tab="$(printf '\t')"
 
+# This script builds a mapping from postal towns to municipalities
+
+
 read_pnr() {
     sed -r 's/\{"streetName":"([^"]+)","postalCode":"([^"]+)","postalTown":"([^"]+)"\},/\1\t\3/' < pnr96/pnr96-streets.json
 }
 
+# Strip [ and ] lines in the JSON file, and convert to tab separated values
 read_pnr | while read road city; do
     [ -z "$city" ] && continue
     printf "%s\t%s\n" "$road" "$city"
 done > data/pnr96.csv
 
+# Make a list of unique postal town names
 while read road city; do
     [ -z "$city" ] && continue
     echo "$city"
@@ -48,7 +53,7 @@ done < data/pnr96.csv | sort | uniq > data/pnr96_cities.txt
 #    fi
 #done < data/pnr96_cities.txt > data/pnr96_non_muncipalities.txt
 
-# Postort --> kommun
+# Postort (postal town) --> kommun (municipality)
 cp data/pnr96.csv data/pnr96_kommun.csv
 while read postort kommun; do
     if [ -n "$kommun" ]; then
