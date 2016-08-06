@@ -169,7 +169,7 @@ får du gärna kontakta mig (&#115;amuel <!--"
 -->snabel-a kodafritt punkt se), så lägger jag in den. Vissa postorter kan dock
 tillhöra flera kommuner, eller så kanske inte postortens gräns stämmer överrens
 med kommungränsen. Kopplingarna från postort till kommun finns att ladda ner
-<a href="https://github.com/samuellb/pnr96addrstats/postort2kommun.csv">här</a> (endast stockholmskommunerna är
+<a href="https://github.com/samuellb/pnr96addrstats/blob/master/postort2kommun.csv">här</a> (endast stockholmskommunerna är
 fullständiga som sagt. CC0-licens). I teorin vore det bättre att räkna per
 postort och använda postnummerpolygonerna från
 <a href="http://postnummeruppror.nu/">Postnummer­uppror</a> istället, men i
