@@ -187,6 +187,8 @@ postort och använda postnummerpolygonerna från
 <a href="http://postnummeruppror.nu/">Postnummer­uppror</a> istället, men i
 skrivande stund så verkar det fungera bättre med kommungränserna i OSM.</p>
 <p>Källkoden till skripten som generade denna sida finns på <a href="https://github.com/samuellb/pnr96addrstats">GitHub</a>.</p>
+<p><em>Kvar =</em> Saknas i OpenStreetMap, men finns i PNR96.<br>
+<em>Okänd =</em> Finns i OpenStreetMap, men finns inte i PNR96. Kan t.ex. vara en ny väg, eller en felstavning.</p>
 <table>
 <thead>
 <tr><th rowspan="2">SCB-nr</th><th rowspan="2">Kommun</th><th colspan="2">Vägar</th></tr>
