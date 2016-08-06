@@ -4,7 +4,7 @@ Norrland are handled.
 
 You can see it in action here:
 
-    https://osm.kodafritt.se/pnr96addrstats/kommuner.html
+    http://samuellb.users.openstreetmap.se/pnr96addrstats/kommuner.html
 
 
 If you want to run it on your own server, you need to:
