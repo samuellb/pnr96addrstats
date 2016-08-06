@@ -33,10 +33,14 @@ noprocess=0
 useragent='AddrStatsBot/0.1.1 (https://osm.kodafritt.se/pnr96addrstats/; samuel@kodafritt.se)'
 export useragent
 
+# Some definitions
+apiurl='http://overpass-api.de/api'
+swedenbbox=54.57,10.37,69.44,24.96
+
 ###
 ### Get a list of all municipality relations in Sweden
 ###
-[ "$nodownload" != 1 ] && wget --no-verbose -U "$useragent" -Odata/kommuner.csv 'http://overpass-api.de/api/interpreter?data=[out:csv(::"type",::"id","ref:scb",short_name,name)];rel["admin_level"="7"]["ref:scb"];out qt;'
+[ "$nodownload" != 1 ] && wget --no-verbose -U "$useragent" -Odata/kommuner.csv "$apiurl"'/interpreter?data=[out:csv(::"type",::"id","ref:scb",short_name,name)];rel["admin_level"="7"]["ref:scb"];out tags qt;&bbox='$swedenbbox
 while read objtype objid scbnummer kortnamn langnamn; do
     echo "$kortnamn"
 done < data/kommuner.csv | tr '[a-zåäöéà]' '[A-ZÅÄÖÉÀ]' | sort | uniq > data/kommuner.txt
@@ -47,7 +51,7 @@ done < data/kommuner.csv | tr '[a-zåäöéà]' '[A-ZÅÄÖÉÀ]' | sort | uniq 
 get_data() {
     areaid=$((3600000000 + $1))
     #wget -U 'AddrStats/0.1 (+samuel@kodafritt.se)' -Odata/roads_$2.csv 'http://overpass-api.de/api/interpreter?data=[out:csv(::"type",::"id",name)];area["admin_level"="7"]["ref:scb"="'$2'"]->.searchArea;way["highway"]["name"](area.searchArea);out qt;'
-    [ "$nodownload" != 1 ] && wget --no-verbose -U "$useragent" -Odata/roads_$2.csv 'http://overpass-api.de/api/interpreter?data=[out:csv(::"type",::"id",name)];way["highway"]["name"](area:'$areaid');out qt;'
+    [ "$nodownload" != 1 ] && wget --no-verbose -U "$useragent" -Odata/roads_$2.csv "$apiurl"'/interpreter?data=[out:csv(::"type",::"id",name)];way["name"]["highway"](area:'$areaid');out tags qt;&bbox='$swedenbbox
 }
 
 header_html() {
