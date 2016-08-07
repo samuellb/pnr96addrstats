@@ -32,6 +32,7 @@ tab="$(printf '\t')"
 
 read_pnr() {
     sed -r 's/\{"streetName":"([^"]+)","postalCode":"([^"]+)","postalTown":"([^"]+)"\},/\1\t\3/' < pnr96/pnr96-streets.json
+    #cat pnr96/pnr96-streets.json | jq --raw-output '.[] | .streetName + ", " + .postalTown'
 }
 
 # Strip [ and ] lines in the JSON file, and convert to tab separated values
