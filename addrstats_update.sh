@@ -102,6 +102,11 @@ process_data() {
     pnr_total=0
     grep -E -- "$tab$uppername$" data/pnr96_kommun.csv > data/temp1
     while read roadname kommun; do
+        # Skip names starting or ending with AB (company names)
+        if [ "$roadname" != "${roadname% AB}" -o "$roadname" != "${roadname#AB }" ]; then
+            continue
+        fi
+        # Look for missing road name in OSM
         if ! grep -qE -- "^$roadname$" data/roads_${scbnummer}_unique.txt; then
             pnr_missing=$(($pnr_missing + 1))
             echo "<tr><td>$roadname</td></tr>" >> "data/${scbnummer}_missing_roads.html"
