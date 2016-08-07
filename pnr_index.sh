@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -eu
 #
 # Copyright © 2016 Samuel Lidén Borell <samuel@kodafritt.se>
 #
