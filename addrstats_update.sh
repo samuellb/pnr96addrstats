@@ -30,7 +30,7 @@ tab="$(printf '\t')"
 nodownload=0
 noprocess=0
 
-useragent='AddrStatsBot/0.1.1 (https://osm.kodafritt.se/pnr96addrstats/; samuel@kodafritt.se)'
+useragent='AddrStatsBot/0.1.1 (http://samuellb.users.openstreetmap.se/pnr96addrstats/; samuel@kodafritt.se)'
 export useragent
 
 # Some definitions
