@@ -142,7 +142,7 @@ if ($search == 1) {
         $roadsResult = $roadsStmt->execute();
         while ($roadRow = $roadsResult->fetchArray())  {
             $otherRoad = strval($roadRow[0]);
-            echo '<tr><td><small><a href="http://www.openstreetmap.org/search?query='.urlencode($roadname.', '.$muniName).'">[OSM]</a></small></td><td>'.htmlspecialchars($otherRoad)."</td></tr>\n";
+            echo '<tr><td><small><a href="http://www.openstreetmap.org/search?query='.urlencode($otherRoad.', '.$muniName).'">[OSM]</a></small></td><td>'.htmlspecialchars($otherRoad)."</td></tr>\n";
         }
         echo "</table>\n";
     }
