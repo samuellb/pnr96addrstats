@@ -99,10 +99,16 @@ if ($municipalityScb !== null && $roadname !== '') {
 <select size="1" name="municipality">
 <?php
 $result = $db->query('SELECT municipalityScb, municipalityName FROM kommun ORDER BY municipalityName COLLATE localecol');
+$muniName = null;
 while ($row = $result->fetchArray(SQLITE3_NUM)) {
     $id = intval($row[0]);
     $name = strval($row[1]);
-    $selected = ($id == $municipalityScb ? ' selected' : '');
+    if ($id == $municipalityScb) {
+        $muniName = $name;
+        $selected = ' selected';
+    } else {
+        $selected = '';
+    }
     echo '<option value="'.htmlspecialchars($id).'"'.$selected.'>'.htmlspecialchars($name)."</option>\n";
 }
 $result->finalize();
@@ -136,7 +142,7 @@ if ($search == 1) {
         $roadsResult = $roadsStmt->execute();
         while ($roadRow = $roadsResult->fetchArray())  {
             $otherRoad = strval($roadRow[0]);
-            echo '<tr><td>'.htmlspecialchars($otherRoad)."</td></tr>\n";
+            echo '<tr><td><small><a href="http://www.openstreetmap.org/search?query='.urlencode($roadname.', '.$muniName).'">[OSM]</a></small></td><td>'.htmlspecialchars($otherRoad)."</td></tr>\n";
         }
         echo "</table>\n";
     }
