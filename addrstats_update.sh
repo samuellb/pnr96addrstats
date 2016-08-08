@@ -69,7 +69,7 @@ header_html() {
 <body>
 <table>
 <thead>
-<tr><th>$2</th></tr>
+<tr><th colspan="2">$2</th></tr>
 </thead>
 <tbody>
 EOF
@@ -113,7 +113,7 @@ process_data() {
         # Look for missing road name in OSM
         if ! grep -qE -- "^$roadname$" data/roads_${scbnummer}_unique.txt; then
             pnr_missing=$(($pnr_missing + 1))
-            echo "<tr><td>$roadname</td></tr>" >> "data/${scbnummer}_missing_roads.html"
+            echo "<tr><td><small><a href=\"../pnrlookup/lookup.php?municipality=${scbnummer}&roadname=$roadname\">[Postnr]</a></small></td><td>$roadname</td></tr>" >> "data/${scbnummer}_missing_roads.html"
         fi
         pnr_total=$(($pnr_total + 1))
     done < data/temp1
