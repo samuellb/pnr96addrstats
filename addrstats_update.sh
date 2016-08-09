@@ -24,7 +24,6 @@
 export LC_ALL=C.UTF-8
 IFS=$(printf '\t')
 export IFS
-mkdir -p data
 tab="$(printf '\t')"
 
 noprocess=0
