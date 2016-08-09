@@ -27,15 +27,10 @@ export IFS
 mkdir -p data
 tab="$(printf '\t')"
 
-nodownload=0
 noprocess=0
 
 useragent='AddrStatsBot/0.1.1 (http://samuellb.users.openstreetmap.se/pnr96addrstats/; samuel@kodafritt.se)'
 export useragent
-
-# Some definitions
-apiurl='http://overpass-api.de/api'
-swedenbbox=54.57,10.37,69.44,24.96
 
 ###
 ### Get a list of all municipality relations in Sweden
@@ -43,17 +38,6 @@ swedenbbox=54.57,10.37,69.44,24.96
 while read objtype objid scbnummer kortnamn langnamn; do
     echo "$kortnamn"
 done < data/kommuner.csv | tr '[a-zåäöéà]' '[A-ZÅÄÖÉÀ]' | sort | uniq > data/kommuner.txt
-
-###
-### Function to download all road names in a municipality.
-###
-get_data() {
-    areaid=$((3600000000 + $1))
-    #wget -U 'AddrStats/0.1 (+samuel@kodafritt.se)' -Odata/roads_$2.csv 'http://overpass-api.de/api/interpreter?data=[out:csv(::"type",::"id",name)];area["admin_level"="7"]["ref:scb"="'$2'"]->.searchArea;way["highway"]["name"](area.searchArea);out qt;'
-    if [ "$nodownload" != 1 ]; then
-        wget --no-verbose -U "$useragent" -Odata/roads_$2.csv "$apiurl"'/interpreter?data=[bbox:'$swedenbbox'][out:csv(::"type",::"id",name)];way["name"]["highway"](area:'$areaid');out tags qt;'
-    fi
-}
 
 header_html() {
     cat <<EOF
@@ -135,13 +119,9 @@ process_data() {
 
 if [ "$noprocess" != 1 ]; then
     while read objtype objid scbnummer kortnamn langnamn; do
-        #if [ "$kortnamn" = "Tyresö" ]; then
-        if [ "${scbnummer#01}" != "$scbnummer" -o "$scbnummer" = 2482 -o "$scbnummer" = 2518 -o "$scbnummer" = 2521 -o "$scbnummer" = 2513 -o "$scbnummer" = 2583 ]; then
-            #if [ ! -e "data/roads_${scbnummer}.csv" ]; then
-                echo "Processing $scbnummer/$kortnamn..." >&2
-                get_data "$objid" "$scbnummer"
-                process_data "$objtype" "$objid" "$scbnummer" "$kortnamn" "$langnamn"
-            #fi
+        if [ -f "data/roads_${scbnummer}.csv" ]; then
+            echo "Processing $scbnummer/$kortnamn..." >&2
+            process_data "$objtype" "$objid" "$scbnummer" "$kortnamn" "$langnamn"
         fi
     done < data/kommuner.csv > data/kommuner_data.csv
 fi
