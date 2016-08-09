@@ -40,9 +40,6 @@ swedenbbox=54.57,10.37,69.44,24.96
 ###
 ### Get a list of all municipality relations in Sweden
 ###
-if [ "$nodownload" != 1 ]; then
-    wget --no-verbose -U "$useragent" -Odata/kommuner.csv "$apiurl"'/interpreter?data=[bbox:'$swedenbbox'][out:csv(::"type",::"id","ref:scb",short_name,name)];rel["admin_level"="7"]["ref:scb"];out tags qt;'
-fi
 while read objtype objid scbnummer kortnamn langnamn; do
     echo "$kortnamn"
 done < data/kommuner.csv | tr '[a-zåäöéà]' '[A-ZÅÄÖÉÀ]' | sort | uniq > data/kommuner.txt
