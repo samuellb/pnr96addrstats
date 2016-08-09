@@ -21,6 +21,3 @@ bättre att räkna per postort och använda postnummerpolygonerna från
 skrivande stund så verkar det fungera bättre med kommungränserna i OSM.
 
 Källkoden till skripten som generade denna sida finns på [https://github.com/samuellb/pnr96addrstats](GitHub).
-
-_Kvar =_ Saknas i OpenStreetMap, men finns i PNR96.<br>
-_Okänd =_ Finns i OpenStreetMap, men finns inte i PNR96. Kan t.ex. vara en ny väg, eller en felstavning.
