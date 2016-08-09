@@ -19,5 +19,3 @@ stockholmskommunerna är fullständiga som sagt. CC0-licens). I teorin vore det
 bättre att räkna per postort och använda postnummerpolygonerna från
 [http://postnummeruppror.nu/](Postnummer­uppro) istället, men i
 skrivande stund så verkar det fungera bättre med kommungränserna i OSM.
-
-Källkoden till skripten som generade denna sida finns på [https://github.com/samuellb/pnr96addrstats](GitHub).
