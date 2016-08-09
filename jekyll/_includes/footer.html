@@ -1,0 +1,26 @@
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">{{ site.title }}</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>{{ site.title }}</li>
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-5">
+        <p>Senast uppdaterad: {{ site.time | date: '%Y-%m-%d %H:%M %Z' }}</p>
+        <p>© <a href="http://www.openstreetmap.org/">OpenStreetMaps</a>
+        bidragsgivare. Postortsdata kommer från "Postnummerkatalogen 1996", vars
+        katalogskydd har upphört. Tabellen görs tillgänglig under
+        <a href="http://opendatacommons.org/licenses/odbl/">ODbL-licensen</a>.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>

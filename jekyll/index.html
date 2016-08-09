@@ -1,0 +1,29 @@
+---
+layout: default
+---
+
+<div class="home">
+  {% capture index_content %}{% include index.md %}{% endcapture %}
+  {{ index_content | markdownify }}
+
+  <table>
+    <thead>
+      <tr><th rowspan="2">SCB-nr</th><th rowspan="2">Kommun</th><th colspan="2">Vägar</th></tr>
+      <tr><th>Kvar %</th><th>Okända %</th></tr>
+    </thead>
+    <tbody>
+      {% for kommun in site.data.kommuner_overview %}
+        <tr>
+          <td>{{ kommun.scbnummer }}</td>
+          <td>{{ kommun.kortnamn }}</td>
+          <td class="{{ kommun.missing_class }}">
+            <a href="data/{{ kommun.scbnummer }}_missing_roads.html">{{ kommun.missing_ratio }}%</a>
+          </td>
+          <td class="{{ kommun.unknown_class }}">
+            <a href="data/{{ kommun.scbnummer }}_unknown_roads.html">{{ kommun.unknown_ratio }}%</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

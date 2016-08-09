@@ -9,3 +9,8 @@ data/kommuner.csv:
 
 kommuner.html: stockholm data/roads_2482.csv data/roads_2518.csv data/roads_2521.csv data/roads_2513.csv data/roads_2584.csv
 	./addrstats_update.sh
+
+.PHONY: jekyll
+jekyll:
+	./kommuner_overview.sh
+	cd jekyll && jekyll build
