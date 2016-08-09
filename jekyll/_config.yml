@@ -7,7 +7,7 @@
 
 # Site settings
 title: OSM-PNR96 Addresstäckning
-email: "&#115;amuel <!--\" -->snabel-a kodafritt punkt se"
+email: "samuel snabel-a kodafritt punkt se"
 description: > # this means to ignore newlines until "baseurl:"
 baseurl: "/pnr96addrstats/jekyll" # the subpath of your site, e.g. /blog
 url: "http://samuellb.users.openstreetmap.se" # the base hostname & protocol for your site
