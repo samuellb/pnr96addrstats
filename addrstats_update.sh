@@ -28,9 +28,6 @@ tab="$(printf '\t')"
 
 noprocess=0
 
-useragent='AddrStatsBot/0.1.1 (http://samuellb.users.openstreetmap.se/pnr96addrstats/; samuel@kodafritt.se)'
-export useragent
-
 ###
 ### Get a list of all municipality relations in Sweden
 ###
@@ -76,11 +73,11 @@ process_data() {
     kortnamn=$4
     langnamn=$5
     uppername=$(echo "$kortnamn" | tr '[a-zåäöéà]' '[A-ZÅÄÖÉÀ]')
-    
+
     while read objtype objid roadname; do
         echo "$roadname"
     done < data/roads_${scbnummer}.csv | tr '[a-zåäöéà]' '[A-ZÅÄÖÉÀ]' | sort | uniq > data/roads_${scbnummer}_unique.txt
-    
+
     header_html "Saknade vägar i $langnamn" "Vägar som finns i PNR-96, men saknas i OSM i $kortnamn" > "data/${scbnummer}_missing_roads.html"
     pnr_missing=0
     pnr_total=0
@@ -99,7 +96,7 @@ process_data() {
     done < data/temp1
     rm data/temp1
     footer_html >> "data/${scbnummer}_missing_roads.html"
-    
+
     header_html "Okända vägar i $langnamn" "Vägar i OSM i $kortnamn som inte finns med i PNR-96" > "data/${scbnummer}_unknown_roads.html"
     pnr_unknown=0
     osm_total=0
@@ -111,7 +108,7 @@ process_data() {
         osm_total=$(($osm_total + 1))
     done < data/roads_${scbnummer}_unique.txt
     footer_html >> "data/${scbnummer}_unknown_roads.html"
-    
+
     # Print row to CSV file
     printf "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n" "$objtype" "$objid" "$scbnummer" "$kortnamn" "$langnamn" "$pnr_missing" "$pnr_total" "$pnr_unknown" "$osm_total"
 }
