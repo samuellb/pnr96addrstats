@@ -8,4 +8,4 @@ data/kommuner.csv:
 	./get_kommuner.sh
 
 kommuner.html: stockholm data/roads_2482.csv data/roads_2518.csv data/roads_2521.csv data/roads_2513.csv data/roads_2584.csv
-	echo "woop"
+	./addrstats_update.sh
