@@ -41,7 +41,7 @@ swedenbbox=54.57,10.37,69.44,24.96
 ### Get a list of all municipality relations in Sweden
 ###
 if [ "$nodownload" != 1 ]; then
-    wget --no-verbose -U "$useragent" -Odata/kommuner.csv "$apiurl"'/interpreter?data=[out:csv(::"type",::"id","ref:scb",short_name,name)];rel["admin_level"="7"]["ref:scb"];out tags qt;&bbox='$swedenbbox
+    wget --no-verbose -U "$useragent" -Odata/kommuner.csv "$apiurl"'/interpreter?data=[bbox:'$swedenbbox'][out:csv(::"type",::"id","ref:scb",short_name,name)];rel["admin_level"="7"]["ref:scb"];out tags qt;'
 fi
 while read objtype objid scbnummer kortnamn langnamn; do
     echo "$kortnamn"
@@ -54,7 +54,7 @@ get_data() {
     areaid=$((3600000000 + $1))
     #wget -U 'AddrStats/0.1 (+samuel@kodafritt.se)' -Odata/roads_$2.csv 'http://overpass-api.de/api/interpreter?data=[out:csv(::"type",::"id",name)];area["admin_level"="7"]["ref:scb"="'$2'"]->.searchArea;way["highway"]["name"](area.searchArea);out qt;'
     if [ "$nodownload" != 1 ]; then
-        wget --no-verbose -U "$useragent" -Odata/roads_$2.csv "$apiurl"'/interpreter?data=[out:csv(::"type",::"id",name)];way["name"]["highway"](area:'$areaid');out tags qt;&bbox='$swedenbbox
+        wget --no-verbose -U "$useragent" -Odata/roads_$2.csv "$apiurl"'/interpreter?data=[bbox:'$swedenbbox'][out:csv(::"type",::"id",name)];way["name"]["highway"](area:'$areaid');out tags qt;'
     fi
 }
 
