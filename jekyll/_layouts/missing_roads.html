@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<article class="post">
+
+  <p>
+  Vägar som finns i PNR-95, men saknas i OSM i {{ page.kortnamn }}
+  </p>
+
+  <table>
+    {% for roadname in page.missing_roads %}
+    <tr>
+      <td>
+        <small>
+          <a href="../pnrlookup/lookup.php?municipality={{ page.scbnummer }}&roadname={{ roadname }}">[Postnr]</a>
+        </small>
+      </td>
+      <td>
+        <small>
+          <a href="https://www.startpage.com/do/search?q={{ roadname }}+{{ page.kortnamn }}\">[Sök]</a>
+        </small>
+      </td>
+      <td>{{ roadname }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {{ content }}
+</article>

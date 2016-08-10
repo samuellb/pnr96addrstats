@@ -11,6 +11,7 @@ kommuner.html: stockholm data/roads_2482.csv data/roads_2518.csv data/roads_2521
 	./addrstats_update.sh
 
 .PHONY: jekyll
-jekyll:
+jekyll: stockholm data/roads_2482.csv data/roads_2518.csv data/roads_2521.csv data/roads_2513.csv data/roads_2584.csv
 	./kommuner_overview.sh
+	./missing_roads.sh
 	cd jekyll && jekyll build

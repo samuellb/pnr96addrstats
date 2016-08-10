@@ -19,7 +19,7 @@ layout: default
           <td>{{ kommun.scbnummer }}</td>
           <td>{{ kommun.kortnamn }}</td>
           <td class="{{ kommun.missing_class }}">
-            <a href="data/{{ kommun.scbnummer }}_missing_roads.html">{{ kommun.missing_ratio }}%</a>
+            <a href="missing_roads/{{ kommun.scbnummer }}.html">{{ kommun.missing_ratio }}%</a>
           </td>
           <td class="{{ kommun.unknown_class }}">
             <a href="data/{{ kommun.scbnummer }}_unknown_roads.html">{{ kommun.unknown_ratio }}%</a>

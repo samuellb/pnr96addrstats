@@ -15,3 +15,14 @@ github: "samuellb/pnr96addrstats"
 
 # Build settings
 markdown: kramdown
+
+collections:
+    missing_roads:
+        output: true
+
+defaults:
+    - scope:
+        path: ""
+        type: missing_roads
+      values:
+          layout: missing_roads
