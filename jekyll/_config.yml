@@ -19,10 +19,15 @@ markdown: kramdown
 collections:
     missing_roads:
         output: true
+    unknown_roads:
+        output: true
 
 defaults:
     - scope:
-        path: ""
-        type: missing_roads
+        path: "_missing_roads"
       values:
           layout: missing_roads
+    - scope:
+        path: "_unknown_roads"
+      values:
+          layout: unknown_roads

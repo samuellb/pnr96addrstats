@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 
 export LC_ALL=C.UTF-8
 IFS=$(printf '\t')
@@ -33,7 +33,7 @@ process_data() {
 scbnummer: ${scbnummer}
 kortnamn: ${kortnamn}
 title: Saknade vägar i ${langnamn}
-missing_roads:
+roads:
 EOF
     grep -E -- "$tab$uppername$" data/pnr96_kommun.csv > data/temp1
     while read roadname kommun; do
@@ -43,10 +43,26 @@ EOF
         fi
         # Look for missing road name in OSM
         if ! grep -qE -- "^$roadname$" data/roads_${scbnummer}_unique.txt; then
-            echo "  - ${roadname}" >> "$outfile"
+            echo "  - '${roadname//\'/\'\'}'" >> "$outfile"
         fi
     done < data/temp1
     rm data/temp1
+    echo "---" >> "$outfile"
+
+    outfile="jekyll/_unknown_roads/$scbnummer.md"
+    cat > "$outfile" <<EOF
+---
+scbnummer: ${scbnummer}
+kortnamn: ${kortnamn}
+title: Saknade vägar i ${langnamn}
+roads:
+EOF
+
+    while read roadname; do
+        if ! grep -qE -- "^$roadname$tab$uppername$" data/pnr96_kommun.csv; then
+            echo "  - '${roadname//\'/\'\'}'" >> "$outfile"
+        fi
+    done < "data/roads_${scbnummer}_unique.txt"
     echo "---" >> "$outfile"
 }
 
