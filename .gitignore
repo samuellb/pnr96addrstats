@@ -4,3 +4,4 @@ kommuner.html
 deps.mk
 *.swp
 jekyll/_missing_roads
+jekyll/_unknown_roads
