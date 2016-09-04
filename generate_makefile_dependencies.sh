@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p data
 [ ! -e data/kommuner.csv ] && ./get_kommuner.sh
 
 stockholm_deps=$(awk '{ print $3 }' < data/kommuner.csv | grep ^01 | while IFS= read -r objid; do
