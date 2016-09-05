@@ -1,0 +1,33 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+title: OSM-PNR96 Addresstäckning
+email: "samuel snabel-a kodafritt punkt se"
+description: > # this means to ignore newlines until "baseurl:"
+baseurl: "/pnr96addrstats/jekyll" # the subpath of your site, e.g. /blog
+url: "http://samuellb.users.openstreetmap.se" # the base hostname & protocol for your site
+github: "samuellb/pnr96addrstats"
+
+# Build settings
+markdown: kramdown
+
+collections:
+    missing_roads:
+        output: true
+    unknown_roads:
+        output: true
+
+defaults:
+    - scope:
+        path: "_missing_roads"
+      values:
+          layout: missing_roads
+    - scope:
+        path: "_unknown_roads"
+      values:
+          layout: unknown_roads

@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="home">
+  {% capture index_content %}{% include index.md %}{% endcapture %}
+  {{ index_content | markdownify }}
+
+  <em>Kvar =</em> Saknas i OpenStreetMap, men finns i PNR96.<br>
+  <em>Okänd =</em> Finns i OpenStreetMap, men finns inte i PNR96. Kan t.ex. vara en ny väg, eller en felstavning.
+  <table>
+    <thead>
+      <tr><th rowspan="2">SCB-nr</th><th rowspan="2">Kommun</th><th colspan="2">Vägar</th></tr>
+      <tr><th>Kvar %</th><th>Okända %</th></tr>
+    </thead>
+    <tbody>
+      {% for kommun in site.data.kommuner_overview %}
+        <tr>
+          <td>{{ kommun.scbnummer }}</td>
+          <td>{{ kommun.kortnamn }}</td>
+          <td class="{{ kommun.missing_class }}">
+            <a href="missing_roads/{{ kommun.scbnummer }}.html">{{ kommun.missing_ratio }}%</a>
+          </td>
+          <td class="{{ kommun.unknown_class }}">
+            <a href="unknown_roads/{{ kommun.scbnummer }}.html">{{ kommun.unknown_ratio }}%</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
